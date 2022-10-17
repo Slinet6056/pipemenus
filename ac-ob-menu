@@ -8,7 +8,7 @@
 # Variables and functions
 MENUS_LIBDIR='/usr/share/archcraft/openbox/menulib'
 if ! . "$MENUS_LIBDIR/archcraft.cfg" 2> /dev/null; then
-	echo "Error: Failed to locate archcraft.cfg in $MENUS_LIBDIR" >&2
+	echo "错误: 在 $MENUS_LIBDIR 中找不到 archcraft.cfg" >&2
 	exit 1
 fi
 
@@ -26,8 +26,8 @@ if [[ "$1" ]]; then
 fi
 
 menuStart
-menuItem 'Simple' "$0 menu-simple.xml"
-menuItem 'Iconic' "$0 menu-icons.xml"
-menuItem 'Glyphs' "$0 menu-glyphs.xml"
-menuItem 'Minimal' "$0 menu-minimal.xml"
+menuItem '简单' "$0 menu-simple.xml"
+menuItem '字符' "$0 menu-icons.xml"
+menuItem '图标' "$0 menu-glyphs.xml"
+menuItem '最小' "$0 menu-minimal.xml"
 menuEnd
