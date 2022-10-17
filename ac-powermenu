@@ -7,13 +7,13 @@
 
 ## Rofi #############################################
 DIR="$HOME/.config/openbox/rofi/dialogs"
-MSG="Options  -  yes / y / no / n"
+MSG="选项  -  yes / y / no / n"
 
 cdialog () {
 rofi -dmenu\
     -i\
     -no-fixed-num-lines\
-    -p "Are You Sure? : "\
+    -p "确认 : "\
     -theme "$DIR"/confirm.rasi
 }
 
