@@ -12,7 +12,7 @@ picom_file="$HOME/.config/picom.conf"
 # Variables and functions
 MENUS_LIBDIR='/usr/share/archcraft/openbox/menulib'
 if ! . "$MENUS_LIBDIR/archcraft.cfg" 2> /dev/null; then
-	echo "Error: Failed to locate archcraft.cfg in $MENUS_LIBDIR" >&2
+	echo "错误: 在 $MENUS_LIBDIR 中找不到 archcraft.cfg" >&2
 	exit 1
 fi
 
@@ -46,26 +46,26 @@ gen_menu () {
     local bcount=1
 
 	menuStart
-	menuItem "Default" "bash $dir/Default.sh"
-	menuItem "Easy Mode" "bash $dir/Easy.sh"
-	menuSeparator "| Simple |"
+	menuItem "默认" "bash $dir/Default.sh"
+	menuItem "简易模式" "bash $dir/Easy.sh"
+	menuSeparator "| 标准 |"
 	for style in "${styles[@]}"; do
 		menuItem "${count}. ${style%.*}" "bash $dir/$style"
 		count=$(($count+1))
 	done
-	menuSeparator "| Bitmap |"
+	menuSeparator "| 字符 |"
 	for bmap in "${bitmap[@]}"; do
 		menuItem "${bcount}. ${bmap%-*}" "bash $dir/$bmap"
 		bcount=$(($bcount+1))
 	done
-	menuSeparator "| Effects |"
+	menuSeparator "| 效果 |"
 	for st in "${styles[@]}"; do
 		cat $dir/${st} | tail -n2 | grep -i "#compositor 'glx'" &>/dev/null
 	done
 	if [[ "$?" == 0 ]]; then
-		menuItem "Enable Auto Effects" "$0 --effects-on"
+		menuItem "启用自动效果" "$0 --effects-on"
 	else
-		menuItem "Disable Auto Effects" "$0 --effects-off"		
+		menuItem "停用自动效果" "$0 --effects-off"
 	fi
 	menuEnd
 }
