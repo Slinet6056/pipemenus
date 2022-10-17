@@ -26,7 +26,7 @@ if [[ "$1" ]]; then
 fi
 
 menuStart
-menuItem '简单' "$0 menu-simple.xml"
+menuItem '标准' "$0 menu-simple.xml"
 menuItem '字符' "$0 menu-icons.xml"
 menuItem '图标' "$0 menu-glyphs.xml"
 menuItem '最小' "$0 menu-minimal.xml"
