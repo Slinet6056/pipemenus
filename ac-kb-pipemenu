@@ -30,13 +30,13 @@ esac
 # Variables and functions
 MENUS_LIBDIR='/usr/share/archcraft/openbox/menulib'
 if ! . "$MENUS_LIBDIR/archcraft.cfg" 2> /dev/null; then
-	echo "Error: Failed to locate archcraft.cfg in $MENUS_LIBDIR" >&2
+	echo "错误: 在 $MENUS_LIBDIR 中找不到 archcraft.cfg" >&2
 	exit 1
 fi
 
 if ! type "$KBSCRIPT" &>/dev/null; then
     menuStart
-    menuSeparator "$KBSCRIPT is not available. Try installing archlabs-pipemenus."
+    menuSeparator "$KBSCRIPT 不可用. 请安装 archlabs-pipemenus."
     menuEnd
     exit 1
 fi
@@ -56,7 +56,7 @@ fi
 if [[ $1 = '--keybinds' ]]; then
     "$KBSCRIPT" > /dev/null
     menuStart
-    menuSeparator "Openbox window commands"
+    menuSeparator "Openbox窗口命令"
     while read -r a b c; do
         if [[ "$a" = "o" ]]; then
             curItem=$(printf "%-20s %s" "$b" "$c")
@@ -65,7 +65,7 @@ if [[ $1 = '--keybinds' ]]; then
     done < "$KBTEXT"
 
     menuSeparator
-    menuSeparator "Run commands"
+    menuSeparator "运行命令"
     while read -r a b c; do
         if [[ "$a" = "x" ]]; then
             curItem=$(printf "%-20s %s" "$b" "$c")
@@ -77,10 +77,10 @@ if [[ $1 = '--keybinds' ]]; then
 fi
 
 menuStart
-    menuItem "Backup and Edit rc.xml" "$KBSCRIPTDIR/ac-kb-pipemenu --rcedit"
+    menuItem "备份并编辑rc.xml" "$KBSCRIPTDIR/ac-kb-pipemenu --rcedit"
     menuSeparator
-    menuItem "Display Keybinds in window" "$KBSCRIPTDIR/ac-kb --gui"
-    echo '        <menu execute="/usr/share/archcraft/openbox/pipemenus/ac-kb-pipemenu --keybinds" id="Display keybinds" label="Display Keybinds in menu"/>'
+    menuItem "在窗口中显示键位绑定" "$KBSCRIPTDIR/ac-kb --gui"
+    echo '        <menu execute="/usr/share/archcraft/openbox/pipemenus/ac-kb-pipemenu --keybinds" id="Display keybinds" label="在菜单中显示键位绑定"/>'
 menuEnd
 
 exit 0
