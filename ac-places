@@ -19,7 +19,7 @@ open_file() {
     elif hash $terminal &>/dev/null; then
         ($terminal -e "$EDITOR $1") &>/dev/null &
     else
-        echo "$0 : failed to open $2" ; exit 1
+        echo "$0 : $2 打开失败" ; exit 1
     fi
 }
 
@@ -64,10 +64,10 @@ case $1 in
         output='<openbox_pipe_menu>'
         if [[ -x $recent_script ]]; then
             output="$output
-  <separator label=\"Recently opened...\"/>
-  <menu execute=\"$recent_script\" id=\"recent\" label=\"files\"/>"
+  <separator label=\"最近打开\"/>
+  <menu execute=\"$recent_script\" id=\"recent\" label=\"文件\"/>"
         else
-            echo "$0 : cannot find executable script $recent_script" >&2
+            echo "$0 : 无法找到可执行脚本 $recent_script" >&2
         fi
         ;;
     *) output='<openbox_pipe_menu>'
@@ -76,7 +76,7 @@ esac
 path=${1:-$HOME}
 path=${path%/}
 
-[[ -d $path ]] || { echo "$0 : $path is not a directory" >&2 ; exit 1 ; }
+[[ -d $path ]] || { echo "$0 : $path 不是一个目录" >&2 ; exit 1 ; }
 
 # only escape if string needs it
 case $path in
@@ -90,7 +90,7 @@ esac
 
 output="$output
   <separator label=\"$pathe\"/>
-  <item label=\"Browse here...\">
+  <item label=\"打开此目录\">
     <action name=\"Execute\">
       <command>&apos;$open_folder_cmd&apos; &apos;$pathe_apos&apos;</command>
     </action>
