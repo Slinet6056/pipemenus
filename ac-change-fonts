@@ -15,7 +15,7 @@ ddir="$HOME/.config/dunst"
 # Variables and functions
 MENUS_LIBDIR='/usr/share/archcraft/openbox/menulib'
 if ! . "$MENUS_LIBDIR/archcraft.cfg" 2> /dev/null; then
-	echo "Error: Failed to locate archcraft.cfg in $MENUS_LIBDIR" >&2
+	echo "错误: 在 $MENUS_LIBDIR 中找不到 archcraft.cfg" >&2
 	exit 1
 fi
 
@@ -149,14 +149,14 @@ elif [[ "$1" == "--all" ]]; then
 
 else
     menuStart
-        menuItem 'Status Bar (polybar)' "$0 --bar"
-        menuItem 'Launchers (rofi)' "$0 --rofi"
-        menuItem 'Terminal (alacritty)' "$0 --terminal"
-        menuItem 'Desktop (openbox)' "$0 --openbox"
-        menuItem 'Notifications (dunst)' "$0 --dunst"
-        menuItem 'Applications (gtk)' "$0 --gtk"
+        menuItem '状态栏 (Polybar)' "$0 --bar"
+        menuItem '启动器 (Rofi)' "$0 --rofi"
+        menuItem '终端 (Alacritty)' "$0 --terminal"
+        menuItem '桌面 (Openbox)' "$0 --openbox"
+        menuItem '通知 (Dunst)' "$0 --dunst"
+        menuItem '应用程序 (Gtk)' "$0 --gtk"
         menuSeparator
-        menuItem 'Change Globally' "$0 --all"
+        menuItem '修改全局字体' "$0 --all"
     menuEnd
 fi
 
