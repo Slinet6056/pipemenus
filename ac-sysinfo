@@ -28,14 +28,14 @@ machine=`uname -m`
 cpu=`cat /proc/cpuinfo | grep 'model name' | cut -d':' -f2 | uniq`
 
 ##-- MEMORY ------------------------
-m_total="`free -m | grep 'Mem' | tr -s '[:blank:]' | cut -d' ' -f2`MB"
-m_used="`free -m | grep 'Mem' | tr -s '[:blank:]' | cut -d' ' -f3`MB"
-m_free="`free -m | grep 'Mem' | tr -s '[:blank:]' | cut -d' ' -f4`MB"
+m_total="`free -m | grep '内存' | tr -s '[:blank:]' | cut -d' ' -f2`MB"
+m_used="`free -m | grep '内存' | tr -s '[:blank:]' | cut -d' ' -f3`MB"
+m_free="`free -m | grep '内存' | tr -s '[:blank:]' | cut -d' ' -f4`MB"
 
 ##-- SWAP ------------------------
-s_total="`free -m | grep 'Swap' | tr -s '[:blank:]' | cut -d' ' -f2`MB"
-s_used="`free -m | grep 'Swap' | tr -s '[:blank:]' | cut -d' ' -f3`MB"
-s_free="`free -m | grep 'Swap' | tr -s '[:blank:]' | cut -d' ' -f4`MB"
+s_total="`free -m | grep '交换' | tr -s '[:blank:]' | cut -d' ' -f2`MB"
+s_used="`free -m | grep '交换' | tr -s '[:blank:]' | cut -d' ' -f3`MB"
+s_free="`free -m | grep '交换' | tr -s '[:blank:]' | cut -d' ' -f4`MB"
 swappiness="`cat /proc/sys/vm/swappiness`%"
 
 ##-- INIT ------------------------
@@ -49,7 +49,7 @@ b_cap=`acpi -i | tail -n1 | cut -d'=' -f2 | tr -d "[:blank:]"`
 ##-- BACKLIGHT ------------------------
 g_card=`ls /sys/class/backlight | head -n1`
 b_value=`cat /sys/class/backlight/$g_card/brightness`
-backlight="$(($b_value*100/255))%"
+backlight="$(($b_value/960))%"
 
 ##-- UPTIME ------------------------
 uptime=`uptime -p | awk '{print $2 " " $3 " " $4 " " $5}'`
@@ -58,24 +58,24 @@ uptime=`uptime -p | awk '{print $2 " " $3 " " $4 " " $5}'`
 load=`cat /proc/loadavg`
 
 ##-- WIFI ------------------------
-interface=`nmcli device status | grep "wifi" | tr -s '[:blank:]' | cut -d' ' -f1`
-type=`nmcli device status | grep "wifi" | tr -s '[:blank:]' | cut -d' ' -f2`
-status=`nmcli device status | grep "wifi" | tr -s '[:blank:]' | cut -d' ' -f3`
-ssid=`nmcli device status | grep "wifi" | tr -s '[:blank:]' | cut -d' ' -f4`
+interface=`nmcli device status | grep "wifi " | tr -s '[:blank:]' | cut -d' ' -f1`
+type=`nmcli device status | grep "wifi " | tr -s '[:blank:]' | cut -d' ' -f2`
+status=`nmcli device status | grep "wifi " | tr -s '[:blank:]' | cut -d' ' -f3`
+ssid=`nmcli device status | grep "wifi " | tr -s '[:blank:]' | cut -d' ' -f4`
 
 ##-- MENU ------------------------
 
 menuStart
 menuSeparator " $USER@$HOSTNAME  |   `date +'%I:%M %p, %b %d %G'`"
-menuItem "  OS         :  $distro ∙ $os ∙ $machine" 'echo'
-menuItem "  KERNEL     :  $kernel" 'echo'
-menuItem "  CPU        : $cpu" 'echo'
-menuItem "  MEMORY     :  $m_used ∙ $m_free ∙ $m_total" 'echo'
-menuItem "  SWAP       :  $s_used ∙ $s_free ∙ $s_total ∙ $swappiness" 'echo'
-menuItem "  INIT       :  $init" 'echo'
-menuItem "  BATTERY    :  $b_perc ∙ $b_stat ∙ Capacity, $b_cap" 'echo'
-menuItem "  BACKLIGHT  :  $backlight" 'echo'
-menuItem "  UPTIME     :  $uptime" 'echo'
-menuItem "  LOAD       :  $load" 'echo'
-menuItem "  WIFI       :  $interface ∙ $status ∙ $ssid" 'echo'
+menuItem "  系统   :  $distro ∙ $os ∙ $machine" 'echo'
+menuItem "  内核   :  $kernel" 'echo'
+menuItem "  CPU   :  $cpu" 'echo'
+menuItem "  内存   :  $m_used ∙ $m_free ∙ $m_total" 'echo'
+menuItem "  交换   :  $s_used ∙ $s_free ∙ $s_total ∙ $swappiness" 'echo'
+menuItem "  INIT   :  $init" 'echo'
+menuItem "  电池   :  $b_perc ∙ $b_stat ∙ Capacity, $b_cap" 'echo'
+menuItem "  亮度   :  $backlight" 'echo'
+menuItem "  运行   :  $uptime" 'echo'
+menuItem "  负载   :  $load" 'echo'
+menuItem "  网络   :  $interface ∙ $status ∙ $ssid" 'echo'
 menuEnd
