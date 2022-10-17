@@ -21,12 +21,12 @@ notify_cmd_shot="dunstify -u low --replace=699 -i /usr/share/archcraft/icons/dun
 
 # notify and view screenshot
 notify_view () {
-	${notify_cmd_shot} "Copied to clipboard."
+	${notify_cmd_shot} "已复制到剪切板"
 	viewnior ${dir}/"$file"
 	if [[ -e "$dir/$file" ]]; then
-		${notify_cmd_shot} "Screenshot Saved."
+		${notify_cmd_shot} "截图已保存"
 	else
-		${notify_cmd_shot} "Screenshot Deleted."
+		${notify_cmd_shot} "截图已删除"
 	fi
 }
 
@@ -38,7 +38,7 @@ copy_shot () {
 # countdown
 countdown () {
 	for sec in `seq $1 -1 1`; do
-		dunstify -t 1000 --replace=699 -i /usr/share/archcraft/icons/dunst/timer.png "Taking shot in : $sec"
+		dunstify -t 1000 --replace=699 -i /usr/share/archcraft/icons/dunst/timer.png "倒计时 : $sec"
 		sleep 1
 	done
 }
@@ -87,11 +87,11 @@ elif [[ "$1" == "--area" ]]; then
 	shotarea
 else
     menuStart
-        menuItem 'Screenshot Now' "$0 --now"
-        menuItem 'Screenshot In 5s' "$0 --in5"
-        menuItem 'Screenshot In 10s' "$0 --in10"
-        menuItem 'Screenshot Area' "$0 --area"
-        menuItem 'Screenshot Window' "$0 --win"
+        menuItem '立刻' "$0 --now"
+        menuItem '5秒倒计时' "$0 --in5"
+        menuItem '10秒倒计时' "$0 --in10"
+        menuItem '区域截屏' "$0 --area"
+        menuItem '窗口截屏' "$0 --win"
     menuEnd
 fi
 
